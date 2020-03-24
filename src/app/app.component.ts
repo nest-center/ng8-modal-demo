@@ -14,7 +14,9 @@ export class AppComponent {
     showModal () {
         this.modal.dialog({
             template : TableDemoComponent,
-            width : 600
+            width : 600,
+            cancelText : '取消',
+            confirmText : '确定'
         });
     }
 }
