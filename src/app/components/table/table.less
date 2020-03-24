@@ -1,0 +1,706 @@
+// Tables
+// --------------------------------------------------
+//== Tables
+@table-cell-padding: 8px;
+@table-condensed-cell-padding: 5px;
+@table-height: 45px;
+@table-title-height: 40px;
+
+@table-bg: #ffffff;
+@table-title-bg: #f2f5f6;
+@table-color: #323232;
+@table-title-color: #525252;
+@table-border-color: #eee;
+@table-link-color: #4c79ff;
+@table-link-color-hover: #5584ff;
+
+@table-font-size: 13px;
+@table-font-weight: 600;
+@table-title-font-weight: 500;
+
+@spacing-2: 10px;
+@font-size-small: 12px;
+
+// space
+@spacing-1: 5px;
+@spacing-2: 10px;
+@spacing-3: 15px;
+@spacing-4: 20px;
+@spacing-5: 25px;
+@spacing-6: 30px;
+@spacing-7: 35px;
+@spacing-8: 40px;
+@spacing-9: 45px;
+@spacing-10: 50px;
+
+// font color
+@font-color-disabled: #cfd5de;
+@font-color-lighter: #bbc4d1;
+@font-color-light: #828282; // 次要文字颜色
+@font-color-base: #525252;
+@font-color-dark: #323232;
+@font-color-default: #323232;
+
+// font-weight
+@font-weight-lighter: lighter;
+@font-weight-normal: normal;
+@font-weight-bold: bold;
+
+@input-color-placeholder: #999;
+
+.flex(@flex) {
+    -webkit-box-flex: @flex;
+    -webkit-flex: @flex;
+    -ms-flex: @flex;
+    flex: @flex;
+}
+.flex-box() {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.flex-flow(@flex) {
+    -webkit-flex-flow: @flex;
+    flex-flow: @flex;
+}
+.flex-align(@flex : center) {
+    -webkit-box-align: @flex;
+    -webkit-align-items: @flex;
+    -ms-flex-align: @flex;
+    align-items: @flex;
+}
+.flex-direction(@flex : column) {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -webkit-flex-direction: @flex;
+    -ms-flex-direction: @flex;
+    flex-direction: @flex;
+}
+.flex-wrap(@flex) {
+    -webkit-flex-wrap: @flex;
+    -ms-flex-wrap: @flex;
+    flex-wrap: @flex;
+}
+.flex-justify(@flex : center) {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: @flex;
+    justify-content: @flex;
+}
+.flex-box-align-justify(@align : center,@justify : center) {
+    .flex-box();
+    .flex-align(@align);
+    .flex-justify(@justify);
+}
+.text-overflow() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+// Placeholder text
+.placeholder(@color: @input-color-placeholder) {
+    // Firefox
+    &::-moz-placeholder {
+        color: @color;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder { color: @color; }
+    // Internet Explorer 10+
+    &::-webkit-input-placeholder { color: @color; }
+    // Safari and Chrome
+}
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+    background: #ffffff;
+    tr {
+        padding: 0 10px;
+        border-bottom: 1px solid #eee;
+        &:hover {
+            background: #f1f7ff;
+        }
+        th, td {
+            padding: 0 10px;
+            text-align: left;
+            word-break: break-all;
+            font-size: 13px;
+            &.divide {
+                border-left: 1px solid #eee;
+            }
+            &.text-left {
+                text-align: left !important;
+            }
+            &.text-center {
+                text-align: center;
+            }
+            &.text-right {
+                text-align: right;
+            }
+            &:first-child {
+                padding-left: 20px;
+            }
+            .arrow-right {
+                width: 175px;
+                display: flex;
+                align-items: center;
+                .arrow {
+                    transform: rotate(270deg);
+                    color: #9aa4ba;
+                    margin-left: 4px;
+                }
+            }
+            .link {
+                color: #4c79ff;
+                cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                    color: #5584ff;
+                }
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .time {
+                color: #9aa4ba;
+                font-size: 12px;
+            }
+            // 链接按钮
+            .btn-link {
+                position: relative;
+                padding: 0 10px;
+                font-size: 13px;
+                line-height: 1;
+                &:first-child {
+                    padding-left: 0;
+                }
+                &:last-child {
+                    padding-right: 0;
+                }
+                &:not(:last-child) {
+                    &:after {
+                        position: absolute;
+                        content: '';
+                        top: 0;
+                        right: 0;
+                        width: 1px;
+                        height: 100%;
+                        background: #ededed;
+                    }
+                }
+            }
+            input {
+                height: 28px;
+                font-size: 13px;
+                &::placeholder {
+                    font-size: 13px;
+                }
+            }
+        }
+        th {
+            height: @table-title-height;
+            background: @table-title-bg;
+            color: @table-title-color;
+            font-weight: @table-title-font-weight;
+            &.checkbox-wrap {
+                .checkbox {
+                    color: @table-title-color;
+                    font-size: @table-font-size;
+                    label {
+                        margin-right: @spacing-2;
+                    }
+                }
+            }
+            // 排序
+            &.sort {
+                .flex-box-align-justify(center, center);
+                .wrap {
+                    position: relative;
+                    .flex-box-align-justify(center, center);
+                    cursor: pointer;
+                }
+                .icons {
+                    position: absolute;
+                    top: 2px;
+                    right: -20px;
+                    width: 18px;
+                    height: 15px;
+                    .icon {
+                        display: block;
+                        height: 6px;
+                        line-height: 6px;
+                        overflow: hidden;
+                        font-size: 18px;
+                        color: #dbdbdb;
+                        &.active {
+                            color: #bbbbbb;
+                        }
+                    }
+                }
+            }
+        }
+        td {
+            height: @table-height;
+            color: @table-color;
+            &.checkbox-wrap {
+                .checkbox {
+                    color: @table-color;
+                    font-size: @table-font-size;
+                    label {
+                        margin-right: @spacing-2;
+                    }
+                    span {
+                        max-width: 90px;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden;
+                    }
+                }
+            }
+            .multi-text {
+                max-width: 300px;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
+            }
+            .text-overflow {
+                max-width: 300px;
+                > p {
+                    width: 100%;
+                    .text-overflow();
+                    &.lighter {
+                        font-size: @font-size-small;
+                        color: #9aa4ba;
+                    }
+                }
+            }
+            .text-flex {
+                display: flex;
+                align-items: center;
+                .icon {
+                    margin-left: 4px;
+                    color: #9aa4ba;
+                }
+            }
+            > .icon {
+                font-size: 12px;
+                margin-right: 10px;
+            }
+            // 表格中的提示
+            &.tips {
+                position: relative;
+                .fixed-tip {
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    display: inline-block;
+                    font-size: 12px;
+                    line-height: 1;
+                    &.red {
+                        color: #f74742;
+                    }
+                    &.yellow {
+                        color: #f78942;
+                    }
+                }
+            }
+        }
+        &.title {
+            background: @table-title-bg;
+            color: @table-title-color;
+            font-weight: 500;
+            th {
+                font-weight: 500;
+            }
+        }
+        &.active {
+            td {
+                .icon {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+        &.get-more {
+            td {
+                color: #4c79ff;
+                cursor: pointer;
+            }
+        }
+        &.default {
+            padding: 10px;
+            td {
+                height: auto !important;
+                padding: 15px 0;
+                img {
+                    display: block;
+                    width: 66px;
+                    height: 66px;
+                    margin: 10px auto;
+                }
+                span {
+                    font-size: 12px;
+                    color: #bbc4d1;
+                }
+            }
+
+        }
+    }
+    // 带操作列
+    &.table-operation {
+        tr {
+            th, td {
+                &:last-child {
+                    text-align: left;
+                }
+            }
+        }
+    }
+    // 表格整体左对齐
+    &.pull-left {
+        tr {
+            th, td {
+                text-align: left;
+            }
+        }
+    }
+    // 表格整体居中对齐
+    &.pull-center {
+        tr {
+            th, td {
+                text-align: center;
+            }
+        }
+    }
+    // 小表格
+    &.table-sm {
+        border: 1px solid @table-border-color;
+        tr {
+            th, td {
+                height: 32px;
+                width: auto;
+                font-size: 12px;
+            }
+            td {
+                &.name {
+                    width: 200px;
+                    text-align: left;
+                    padding-left: 20px;
+                    > div {
+                        width: 200px;
+                        .text-overflow();
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 标题
+.headline {
+    overflow: hidden;
+    margin: @spacing-6 0 @spacing-2;
+    > h3 {
+        float: left;
+        color: @font-color-dark;
+        font-weight: @font-weight-bold;
+        font-size: 16px;
+    }
+    > p {
+        position: relative;
+        top: 2px;
+        float: left;
+        margin-left: 10px;
+        color: #9aa4ba;
+        font-size: 13px;
+        span {
+            color: #323e59;
+            &.warning {
+                color: #ff9300;
+            }
+        }
+    }
+}
+
+.table-condensed {
+    > thead,
+    > tbody,
+    > tfoot {
+        > tr {
+            > th,
+            > td {
+                padding: @table-condensed-cell-padding;
+            }
+        }
+    }
+}
+
+// Bordered version
+.table-bordered {
+    //border: 1px solid @table-border-color;
+    tr {
+        padding: 0;
+        th, td {
+            padding: 0;
+            line-height: initial;
+            &:first-child {
+                padding: 0;
+            }
+        }
+        th {
+            border: 1px solid @table-border-color;
+        }
+        td {
+            border: 1px solid @table-border-color;
+            > input[type='text'] {
+                width: 100%;
+                border: none;
+                padding: 0 10px;
+                .placeholder(#c9ccd6);
+            }
+        }
+    }
+
+}
+
+.table-padding { text-align: center;
+    > thead > tr > th,
+    > tbody > tr > th,
+    > tfoot > tr > th,
+    > thead > tr > td,
+    > tbody > tr > td,
+    > tfoot > tr > td { padding: 5px 8px; vertical-align: middle; font-size: .8em }
+}
+.table-normal {
+    table-layout: initial;
+    tr {
+        th {
+            white-space: nowrap;
+        }
+    }
+}
+// Table cell sizing
+table col[class*="col-"] {
+    position: static;
+    float: none;
+    display: table-column;
+}
+
+table {
+    td,
+    th {
+        &[class*="col-"] {
+            position: static;
+            float: none;
+            display: table-cell;
+        }
+    }
+}
+
+.ui-table {
+    position: relative;
+    .ui-sortable-column {
+        cursor: pointer;
+    }
+}
+// 排序图标
+.ui-table p-sorticon {
+    vertical-align: middle;
+    display: inline-block;
+    width: 14px;
+    height: 12px;
+    margin-top: -1px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    i {
+        display: block;
+        height: 6px;
+        line-height: 6px;
+        overflow: hidden;
+        position: absolute;
+        color: #c5c8ce;
+        transition: color .2s ease-in-out;
+        font-size: 18px;
+        &:hover,
+        &.active {
+            color: #aaaaaa;
+        }
+        &:first-child {
+            top: 0;
+            left: 0;
+        }
+        &:last-child {
+            bottom: 0;
+            left: 0;
+        }
+    }
+}
+
+.ui-table-auto-layout > .ui-table-wrapper {
+    overflow-x: auto;
+}
+
+.ui-table-auto-layout > .ui-table-wrapper > table {
+    table-layout: auto;
+}
+
+/* Scrollable */
+.ui-table-scrollable-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+.ui-table-scrollable-header,
+.ui-table-scrollable-footer {
+    overflow: hidden;
+    border: 0 none;
+}
+.ui-table-scrollable-body {
+    overflow: auto;
+    position: relative;
+}
+
+.ui-table-virtual-table {
+    position: absolute;
+}
+.ui-table-loading-virtual-table {
+    display: none;
+}
+/* Frozen Columns */
+.ui-table-frozen-view {
+    position: absolute;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.17);
+}
+.ui-table-unfrozen-view {
+    position: relative;
+    top: 0;
+}
+.ui-table-frozen-view .ui-table-scrollable-body {
+    overflow: hidden;
+}
+//p-table组件固定列的都是左对齐
+.ui-table {
+    .ui-table-frozen-view {
+        .ui-table-thead, .ui-table-tbody {
+            tr > th, tr > td {
+                text-align: left;
+                .btn:first-child {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+}
+/* Resizable */
+.ui-table-resizable > .ui-table-wrapper {
+    overflow-x: auto;
+}
+.ui-table-resizable .ui-table-thead > tr > th,
+.ui-table-resizable .ui-table-tfoot > tr > td,
+.ui-table-resizable .ui-table-tbody > tr > td {
+    overflow: hidden;
+}
+
+.ui-table-resizable .ui-resizable-column {
+    background-clip: padding-box;
+    position: relative;
+}
+
+.ui-table-resizable-fit .ui-resizable-column:last-child .ui-column-resizer {
+    display: none;
+}
+
+.ui-table .ui-column-resizer {
+    display: block;
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    margin: 0;
+    width: .5em;
+    height: 100%;
+    padding: 0;
+    cursor: col-resize;
+    border: 1px solid transparent;
+}
+
+.ui-table .ui-column-resizer-helper {
+    width: 1px;
+    position: absolute;
+    z-index: 10;
+    display: none;
+}
+
+/* Edit */
+.ui-table .ui-table-tbody > tr > td.ui-editing-cell {
+    padding: 0;
+}
+
+.ui-table .ui-table-tbody > tr > td.ui-editing-cell p-celleditor > * {
+    width: 100%;
+}
+
+/* Reorder */
+.ui-table-reorder-indicator-up,
+.ui-table-reorder-indicator-down {
+    position: absolute;
+    display: none;
+}
+
+/* Responsive */
+.ui-table-responsive .ui-table-tbody > tr > td .ui-column-title {
+    display: none;
+}
+
+/* Loader */
+.ui-table-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.ui-table-loading-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    margin-top: -1em;
+    margin-left: -1em;
+}
+
+.ui-table .ui-table-loading-icon {
+    font-size: 2em;
+}
+.ui-table-sm {
+    font-size: 12px;
+    .btn-link {
+        font-size: 12px;
+    }
+}
+.ui-table .ui-table-tbody {
+    tr.ui-table-dragpoint-bottom {
+        td {
+            -webkit-box-shadow: inset 0 -2px 0 0 #1f7ed0;
+            -moz-box-shadow: inset 0 -2px 0 0 #1f7ed0;
+            box-shadow: inset 0 -2px 0 0 #1f7ed0;
+        }
+    }
+}
+.ui-table .ui-table-tbody {
+    tr.ui-table-dragpoint-top {
+        td {
+            box-shadow: inset 0 3px 0 0 #1f7ed0;
+        }
+    }
+}

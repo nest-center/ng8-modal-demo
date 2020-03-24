@@ -1,0 +1,142 @@
+.flex-box() {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.flex-justify(@flex : center) {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: @flex;
+    justify-content: @flex;
+}
+.border-radius(@radius) {
+    border-radius: @radius;
+}
+@pagination-color: #555;
+@font-size-base: 14px;
+@border-radius-base: 4px;
+@pagination-border: #ccc;
+@font-size-small: 12px;
+
+// Pagination
+// --------------------------------------------------
+.pagination-host {
+    display: block;
+}
+.pagination {
+    .flex-box();
+}
+.page-link {
+    position: relative;
+    display: block;
+    height: 30px;
+    line-height: 28px;
+    padding: 0 10px;
+    color: @pagination-color;
+    font-size: @font-size-base;
+    .border-radius(@border-radius-base);
+    text-align: center;
+    border: 1px solid @pagination-border;
+    &:hover {
+        cursor: pointer;
+        color: #5d97ff;
+        border-color: #4c79ff;
+    }
+    .icon {
+        font-size: 12px;
+        transform: scale(0.8);
+        margin: 0;
+    }
+}
+.page-total {
+    align-self: center;
+    padding-right: 10px;
+    line-height: 30px;
+    font-size: @font-size-base;
+    color: lighten(#000, 33.5%);
+}
+.page-goto {
+    .flex-box();
+    padding-left: 10px;
+    font-size: @font-size-base;
+    line-height: 30px;
+    color: lighten(#000, 33.5%);
+    > input {
+        width: 30px;
+        margin: 0 5px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border: 1px solid;
+        .border-radius(@border-radius-base);
+    }
+}
+.page-item {
+    padding: 0 2px;
+    &.active .page-link {
+        pointer-events: none;
+        color: #5d97ff;
+        border-color: #4c79ff;
+    }
+    &.disabled .page-link {
+        color: #ddd;
+        cursor: not-allowed;
+        border-color: #ddd;
+    }
+}
+// 中间对齐
+.pagination-center {
+    .flex-justify(center);
+}
+// 右边对齐
+.pagination-right {
+    .flex-justify(flex-end);
+}
+.pagination-sm {
+    .page-total {
+        line-height: 20px;
+        font-size: @font-size-small;
+    }
+    .page-link {
+        height: 20px;
+        line-height: 18px;
+        padding: 0 4px;
+        font-size: @font-size-small;
+    }
+    .page-goto {
+        font-size: @font-size-small;
+        line-height: 20px;
+        > input {
+            width: 20px;
+            margin: 0 3px;
+            height: 20px;
+            line-height: 20px;
+        }
+    }
+}
+.pagination-smaller {
+    .page-total {
+        line-height: 26px;
+        font-size: @font-size-small;
+        padding-right: 4px;
+    }
+    .page-link {
+        height: 26px;
+        line-height: 24px;
+        padding: 0 4px;
+    }
+    .page-goto {
+        line-height: 26px;
+        font-size: @font-size-small;
+        padding-left: 4px;
+        > input {
+            width: 18px;
+            margin: 0 3px;
+            height: 26px;
+            line-height: 26px;
+        }
+    }
+}

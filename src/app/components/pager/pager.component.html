@@ -1,0 +1,54 @@
+<ul class="pagination pagination-right" [ngClass]="className" *ngIf="shouldShow()">
+	<li class="page-total" *ngIf="isShowTotals">
+		共{{ totals }}条
+		<ng-container *ngIf="showTotalPage">&nbsp;共{{ getLast() }}页</ng-container>
+	</li>
+	<li class="page-item" [class.disabled]="pageIndex === 1" *ngIf="showFirst">
+		<a class="page-link" (click)="toFirst()">
+			<ng-container *ngIf="!!firstText">
+				{{ firstText }}
+			</ng-container>
+			<ng-container *ngIf="!firstText">
+				<i class="icon icon-page-start"></i>
+			</ng-container>
+		</a>
+	</li>
+	<li class="page-item" [class.disabled]="pageIndex === 1">
+		<a class="page-link" (click)="toPrev()">
+			<ng-container *ngIf="!!prevText">
+				<i class="icon">{{ prevText }}</i>
+			</ng-container>
+			<ng-container *ngIf="!prevText">
+				<i class="icon icon-page-up"></i>
+			</ng-container>
+		</a>
+	</li>
+	<li class="page-item" *ngFor="let page of getPages()" [class.active]="pageIndex === page">
+		<a class="page-link" (click)="paginate(page)">{{ page }}</a>
+	</li>
+
+	<li class="page-item" [class.disabled]="pageIndex === getLast()">
+		<a class="page-link" (click)="toNext()">
+			<ng-container *ngIf="!!nextText">
+				{{ nextText }}
+			</ng-container>
+			<ng-container *ngIf="!nextText">
+				<i class="icon icon-page-down"></i>
+			</ng-container>
+		</a>
+	</li>
+
+	<li class="page-item" [class.disabled]="pageIndex === getLast()" *ngIf="showLast">
+		<a class="page-link" (click)="toLast()">
+			<ng-container *ngIf="!!lastText">
+				{{ lastText }}
+			</ng-container>
+			<ng-container *ngIf="!lastText">
+				<i class="icon icon-page-end"></i>
+			</ng-container>
+		</a>
+	</li>
+	<li class="page-goto" *ngIf="isShowJump">
+		跳至<input type="text" id="gotoInput" autocomplete="off" [(ngModel)]="gotoIndex" number [min]="1" [max]="getLast()" #gotoRef/>页
+	</li>
+</ul>
